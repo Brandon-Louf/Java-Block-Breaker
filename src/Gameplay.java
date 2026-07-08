@@ -52,7 +52,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
         // Ball
         g.setColor(Color.LIGHT_GRAY);
         g.fillOval(ballX, ballY, 20, 20);
-        g.dispose();
+        //g.dispose();
     }
 
     @Override
