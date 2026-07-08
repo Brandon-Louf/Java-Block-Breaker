@@ -59,6 +59,22 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
     public void actionPerformed(ActionEvent e) {
         // Starts the timer and recalls the graphics
         time.start();
+        if(play) {
+            // Makes the ball position value constantly add
+            ballX += ballXDirect;
+            ballY += ballYDirect;
+            // Inverts the direction if the side edges of the window are hit
+            if (ballX < 0) {
+                ballXDirect = -ballXDirect;
+            }
+            if (ballY < 0) {
+                ballYDirect = -ballYDirect;
+            }
+            // And for the top (not the bottom)
+            if (ballX > 670) {
+                ballXDirect = -ballXDirect;
+            }
+        }
         repaint();
     }
 
@@ -70,35 +86,44 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
     // Controls for the paddle
     @Override
     public void keyPressed(KeyEvent e) {
-        // Left input
-        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+        // Right input
+        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            System.out.print("Test ");
             if (sliderX >= 600) {
+                System.out.println("Border");
                 // Prevents the slider from going off the panel
                 sliderX = 600;
             } else {
-                moveLeft();
+                System.out.print("Right ");
+                moveRight();
             }
         }
-        // Right input
-        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+        // Left input
+        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+            System.out.print("Test ");
             if (sliderX < 10) {
+                System.out.println("Border");
                 // Prevents the slider from going off the panel
                 sliderX = 10;
             } else {
-                moveRight();
+                System.out.print("Left ");
+                moveLeft();
             }
         }
     }
 
     // Movement methods called from the controls
-    public void moveLeft() {
-        play = true;
-        sliderX -= 20;
-    }
     public void moveRight() {
+        System.out.println("Input");
         play = true;
         sliderX += 20;
     }
+    public void moveLeft() {
+        System.out.println("Input");
+        play = true;
+        sliderX -= 20;
+    }
+
 
     @Override
     public void keyReleased(KeyEvent e) {
