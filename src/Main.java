@@ -11,9 +11,10 @@ public class Main {
         object.setVisible(true);
         object.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         object.add(gamePlay);
+        //object.addKeyListener(gamePlay);
 
         // Adds the Gameplay class/properties to the window
-        Gameplay gameStart = new Gameplay();
-        object.add(gameStart);
+        //Gameplay gameStart = new Gameplay();
+        //object.add(gameStart);
     }
 }
