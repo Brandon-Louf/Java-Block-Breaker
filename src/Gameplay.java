@@ -60,7 +60,11 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
         // Starts the timer and recalls the graphics
         time.start();
         if(play) {
-            // Makes the ball position value constantly add
+            // Adds collision between the slider and ball
+            if (new Rectangle(ballX, ballY, 20, 20).intersects(new Rectangle(sliderX, 550, 100, 8))) {
+                ballYDirect = -ballYDirect;
+            }
+            // Makes the ball move constantly
             ballX += ballXDirect;
             ballY += ballYDirect;
             // Inverts the direction if the side edges of the window are hit
