@@ -12,7 +12,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
     // Game only starts with our input with a score of 0
     private boolean play = false;
     private int score = 0;
-    // 7x3 bricks
+    // 3x7 bricks
     private int totalBricks = 21;
 
     private Timer time;
@@ -25,7 +25,12 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
     private int ballXDirect = -1;
     private int ballYDirect = -2;
 
+    // Calls the MapGenerator
+    private MapGenerator map;
+
     public Gameplay() {
+        // Again, 3x7 bricks
+        map = new MapGenerator(3, 7);
         addKeyListener(this);
         setFocusable(true);
         setFocusTraversalKeysEnabled(false);
@@ -38,6 +43,9 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
         // Background
         g.setColor(Color.BLUE);
         g.fillRect(1, 1, 692, 592);
+
+        // Brick Map
+        map.draw((Graphics2D)g);
 
         // Boarder
         g.setColor(Color.GRAY);
