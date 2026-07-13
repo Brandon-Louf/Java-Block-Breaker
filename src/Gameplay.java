@@ -72,6 +72,38 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
             if (new Rectangle(ballX, ballY, 20, 20).intersects(new Rectangle(sliderX, 550, 100, 8))) {
                 ballYDirect = -ballYDirect;
             }
+            A: for(int i = 0; i < map.map.length; i++) {
+                // map.map is the Gameplay-map.MapGenerator-map
+                for (int j = 0; j < map.map[0].length; j++) {
+                    if (map.map[i][j] > 0) {
+                        int brickX =  j * map.brickWidth + 80;
+                        int brickY = i * map.brickHeight + 50;
+                        int brickWidth = map.brickWidth;
+                        int brickHeight = map.brickHeight;
+
+                        // Rectangle objects for collision purposes
+                        Rectangle rect = new Rectangle(brickX, brickY, brickWidth, brickHeight);
+                        Rectangle ballRect = new Rectangle(ballX, ballY, 20, 20);
+                        Rectangle brickRect = rect;
+
+                        if (ballRect.intersects(brickRect)) {
+                            // Removes the brick by setting its position to 0
+                            map.setBrickValue(0, i, j);
+                            totalBricks--;
+                            score += 5;
+                            // For intersection points
+                            if (ballX + 19 <= brickRect.x || ballX + 1 >= brickRect.x + brickRect.width) {
+                                ballXDirect = -ballXDirect;
+                            } else {
+                                ballYDirect = -ballYDirect;
+                            }
+                            // Breaks the loop once a brick is broken
+                            break A;
+                        }
+
+                    }
+                }
+            }
             // Makes the ball move constantly
             ballX += ballXDirect;
             ballY += ballYDirect;
