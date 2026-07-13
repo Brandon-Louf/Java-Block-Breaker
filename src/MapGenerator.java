@@ -24,6 +24,11 @@ public class MapGenerator {
                 if (map[i][j] > 0) {
                     g.setColor(Color.YELLOW);
                     g.fillRect(j * brickWidth + 88, i * brickHeight + 50, brickWidth, brickHeight);
+
+                    // Adds a boarder of 3 to each brick
+                    g.setStroke(new BasicStroke(3));
+                    g.setColor(Color.BLACK);
+                    g.drawRect(j * brickWidth + 88, i * brickHeight + 50, brickWidth, brickHeight);
                 }
             }
         }
