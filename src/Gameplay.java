@@ -20,8 +20,10 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 
     private int sliderX = 310;
 
+    // Ball starting position
     private int ballX = 120;
     private int ballY = 350;
+    // Ball speed
     private int ballXDirect = -1;
     private int ballYDirect = -2;
 
@@ -66,6 +68,18 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
         g.setColor(Color.LIGHT_GRAY);
         g.fillOval(ballX, ballY, 20, 20);
         //g.dispose();
+
+        // Game Over screen
+        if (ballY > 570) {
+            play = false;
+            ballXDirect = 0;
+            ballYDirect = 0;
+            g.setColor(Color.RED);
+            g.setFont(new Font("serif", Font.BOLD, 30));
+            g.drawString("Game Over", 190, 300);
+            g.setFont(new Font("serif", Font.BOLD, 20));
+            g.drawString("Press Enter to Restart", 190, 230);
+        }
     }
 
     @Override
@@ -157,6 +171,25 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
             } else {
                 System.out.print("Left ");
                 moveLeft();
+            }
+        }
+        // Game restart
+        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+            // Only if game is over
+            if (!play) {
+                play = true;
+                // Original ball values
+                ballX = 120;
+                ballY = 350;
+                ballXDirect = -1;
+                ballYDirect = -2;
+                // Original other values
+                sliderX = 310;
+                score = 0;
+                totalBricks = 21;
+                // Regenerates map and repaints graphics
+                map = new MapGenerator(3, 7);
+                repaint();
             }
         }
     }
