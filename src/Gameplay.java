@@ -69,7 +69,21 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
         g.fillOval(ballX, ballY, 20, 20);
         //g.dispose();
 
-        // Game Over screen
+        // Game complete screen
+        if (totalBricks <= 0) {
+            if (ballY > 570) {
+                play = false;
+                ballXDirect = 0;
+                ballYDirect = 0;
+                g.setColor(Color.YELLOW);
+                g.setFont(new Font("serif", Font.BOLD, 30));
+                g.drawString("You Win", 190, 300);
+                g.setFont(new Font("serif", Font.BOLD, 20));
+                g.drawString("Press Enter to Restart", 190, 230);
+            }
+        }
+
+        // Game over screen
         if (ballY > 570) {
             play = false;
             ballXDirect = 0;
@@ -143,7 +157,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
-
+        // Not used
     }
 
     // Controls for the paddle
@@ -209,6 +223,6 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
-
+        // Not used
     }
 }
