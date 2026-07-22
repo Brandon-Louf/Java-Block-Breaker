@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Random;
 import javax.swing.Timer;
 
 /* Extends from JPanel to inherit its properties and mesh with the window
@@ -12,6 +13,10 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
     // Game only starts with our input with a score of 0
     private boolean play = false;
     private int score = 0;
+
+    // Random number generator
+    Random r = new Random();
+
     // 3x7 bricks
     private int totalBlocks = 21;
 
@@ -24,7 +29,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
     private int ballX = 120;
     private int ballY = 350;
     // Ball speed
-    private int ballXDirect = -1;
+    private int ballXDirect = r.nextBoolean() ? 1 : -1;
     private int ballYDirect = -2;
 
     // Calls the MapGenerator
@@ -38,6 +43,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
         setFocusTraversalKeysEnabled(false);
         time = new Timer(delay, this);
         time.start();
+        System.out.println(ballXDirect);
     }
 
     // Defines the graphics
@@ -195,7 +201,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
                 // Original ball values
                 ballX = 120;
                 ballY = 350;
-                ballXDirect = -1;
+                ballXDirect = r.nextBoolean() ? 1 : -1;
                 ballYDirect = -2;
                 // Original other values
                 sliderX = 310;
