@@ -3,8 +3,8 @@ import java.awt.*;
 public class MapGenerator {
     // Setup for an array grid of bricks
     public int map[][];
-    public int brickWidth;
-    public int brickHeight;
+    public int blockWidth;
+    public int blockHeight;
     public MapGenerator(int row, int col) {
         map = new int[row][col];
         // Positions of the bricks
@@ -13,8 +13,8 @@ public class MapGenerator {
                 map[i][j] = 1;
             }
         }
-        brickWidth = 540/col;
-        brickHeight = 150/row;
+        blockWidth = 540/col;
+        blockHeight = 150/row;
     }
     public void draw(Graphics2D g) {
         // Positions of the graphics (matching the bricks)
@@ -23,17 +23,17 @@ public class MapGenerator {
                 // Draw a graphic if at a brick position
                 if (map[i][j] > 0) {
                     g.setColor(Color.YELLOW);
-                    g.fillRect(j * brickWidth + 88, i * brickHeight + 50, brickWidth, brickHeight);
+                    g.fillRect(j * blockWidth + 88, i * blockHeight + 50, blockWidth, blockHeight);
 
                     // Adds a boarder of 3 to each brick
                     g.setStroke(new BasicStroke(3));
                     g.setColor(Color.BLACK);
-                    g.drawRect(j * brickWidth + 88, i * brickHeight + 50, brickWidth, brickHeight);
+                    g.drawRect(j * blockWidth + 88, i * blockHeight + 50, blockWidth, blockHeight);
                 }
             }
         }
     }
-    public void setBrickValue(int value, int row, int col) {
+    public void setBlockValue(int value, int row, int col) {
         map[row][col] = value;
     }
 }

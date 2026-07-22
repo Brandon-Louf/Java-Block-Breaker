@@ -13,7 +13,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
     private boolean play = false;
     private int score = 0;
     // 3x7 bricks
-    private int totalBricks = 21;
+    private int totalBlocks = 21;
 
     private Timer time;
     private int delay = 8;
@@ -70,7 +70,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
         //g.dispose();
 
         // Game complete screen
-        if (totalBricks <= 0) {
+        if (totalBlocks <= 0) {
             if (ballY > 570) {
                 play = false;
                 ballXDirect = 0;
@@ -109,10 +109,10 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
                 // map.map is the Gameplay-map.MapGenerator-map
                 for (int j = 0; j < map.map[0].length; j++) {
                     if (map.map[i][j] > 0) {
-                        int brickX =  j * map.brickWidth + 80;
-                        int brickY = i * map.brickHeight + 50;
-                        int brickWidth = map.brickWidth;
-                        int brickHeight = map.brickHeight;
+                        int brickX =  j * map.blockWidth + 80;
+                        int brickY = i * map.blockHeight + 50;
+                        int brickWidth = map.blockWidth;
+                        int brickHeight = map.blockHeight;
 
                         // Rectangle objects for collision purposes
                         Rectangle rect = new Rectangle(brickX, brickY, brickWidth, brickHeight);
@@ -121,8 +121,8 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 
                         if (ballRect.intersects(brickRect)) {
                             // Removes the brick by setting its position to 0
-                            map.setBrickValue(0, i, j);
-                            totalBricks--;
+                            map.setBlockValue(0, i, j);
+                            totalBlocks--;
                             score += 5;
                             // For intersection points
                             if (ballX + 19 <= brickRect.x || ballX + 1 >= brickRect.x + brickRect.width) {
@@ -200,7 +200,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
                 // Original other values
                 sliderX = 310;
                 score = 0;
-                totalBricks = 21;
+                totalBlocks = 21;
                 // Regenerates map and repaints graphics
                 map = new MapGenerator(3, 7);
                 repaint();
